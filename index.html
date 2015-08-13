@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Restaurants</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/calendar.css">
+    <link href='fullcalendar/fullcalendar.css' rel='stylesheet' />
+    <link href='fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand">
+                        Calendar
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div id="calendar" class="col-md-6"></div>
+            <div class="col-md-6" id="dateDetails">
+                <div class="col-md-6">
+                    <div id="bookingData" class="well">
+                        <h4>Booking Data</h4>
+                        <form>
+                            <div class="forn-group">
+                                <label for="fecha">Fecha</label>
+                                <input type="text" class="form-control" id="fecha" placeholder="Fecha">
+                            </div>
+                            <div id="datetimepicker" class="form-group input-append">
+                                <label for="hora">Hora</label>
+                                <input type="text" class="form-control" id="hora" placeholder="Hora" data-format="hh:mm">
+                                <span class="add-on btn btn-default "><i data-time-icon="glyphicon glyphicon-time" data-date-icon="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="well">
+                        <h4>User Data</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!--Container-->
+
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src='fullcalendar/lib/moment.min.js'></script>
+    <script src='fullcalendar/lib/jquery.min.js'></script>
+    <script src='fullcalendar/fullcalendar.min.js'></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src='js/calendar.js'></script>
+
+    <script> 
+        $(function(){
+            $('#datetimepicker').datetimepicker({
+                pickDate: false
+            });
+        });
+    </script>
+
+    <script>document.write('<script src="http://192.168.1.38:35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+</body>
+</html>
