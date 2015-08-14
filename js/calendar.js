@@ -20,11 +20,8 @@
                 var view = ($calendar.fullCalendar('getView'));
                 if(view.name == 'agendaDay'){
                     i++;
-                    $calendar.fullCalendar('clientEvents', function(existingEvents){
-                        console.log('Existing event ' + i + ' start: ' + existingEvents.start);
-                        console.log('Existing event ' + i + ' end: ' + existingEvents.end);
-                    })
                     if(i > 1){
+                        var title = prompt('Event Title:');
                         var eventData;
                         if (title) {
                             eventData = {
@@ -32,6 +29,26 @@
                                 start: start,
                                 end: end
                             };
+                            $calendar.fullCalendar('clientEvents', function(existingEvents){
+    
+                                // Existing events data
+                                var existingEventDateStart = existingEvents.start._d.toJSON().split('T')[0];
+                                var existingEventDateEnd = existingEvents.end._d.toJSON().split('T')[0];
+                                var existingEventTimeStart = existingEvents.start._d.toJSON().split('T')[1].split(':')[0];
+                                var existingEventTimeEnd = existingEvents.end._d.toJSON().split('T')[1].split(':')[0];
+
+                                // New event Data
+                                var newEventDateStart = eventData.start._d.toJSON().split('T')[0];
+                                var newEventDateEnd = eventData.end._d.toJSON().split('T')[0];
+                                var newEventTimeStart = eventData.start._d.toJSON().split('T')[1].split(':')[0];
+                                var newEventTimeEnd = eventData.end._d.toJSON().split('T')[1].split(':')[0];
+
+                                if(existingEventDateStart == newEventDateStart){
+                                    if(parseInt(newEventTimeStart) <= parseInt(existingEventTimeStart) && parseInt(newEventTimeEnd) <= parseInt(existingEventTimeEnd) && parseInt(newEventTimeEnd) > parseInt(existingEventTimeStart)){
+                                        console.log('They Colapse');
+                                    }
+                                }
+                            });
                             $calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
                         }
                         $calendar.fullCalendar('unselect');   
@@ -71,6 +88,11 @@
                     title: 'Meeting',
                     start: '2015-08-14T10:00:00',
                     end: '2015-08-14T12:00:00'
+                },
+                {
+                    title: 'Hiking',
+                    start: '2015-08-14T13:00:00',
+                    end: '2015-08-14T15:00:00'
                 }
                 
             ]
