@@ -6,6 +6,7 @@
         var lastView;
         var i = 0;
         var create = true;
+        var now = moment();
 
         // Init calendar
         $calendar.fullCalendar({
@@ -24,7 +25,8 @@
                 if(view.name == 'agendaDay'){
                     i++;
                     if(i > 1){
-                        var title = prompt('Event Title:');
+                        var validForm = $('#bookData').isValid();
+                        var title = $('#nombre').val() + ' ' + $('#apellido').val();
                         var eventData;
                         // Store the new event data
                         if (title) {
@@ -36,17 +38,17 @@
                             $calendar.fullCalendar('clientEvents', function(existingEvents){
     
                                 // Existing events data
-                                var existingEventDateStart = existingEvents.start._d.toJSON().split('T')[0];
-                                var existingEventDateEnd = existingEvents.end._d.toJSON().split('T')[0];
-                                var existingEventTimeStart = existingEvents.start._d.toJSON().split('T')[1].split(':')[0];
-                                var existingEventTimeEnd = existingEvents.end._d.toJSON().split('T')[1].split(':')[0];
+                                var existingEventDateStart = existingEvents.start.date();
+                                var existingEventDateEnd = existingEvents.end.date();
+                                var existingEventTimeStart = existingEvents.start.hour();
+                                var existingEventTimeEnd = existingEvents.end.hour();
                                 var existingEventDuration = parseInt(existingEventTimeEnd) - parseInt(existingEventTimeStart);
 
                                 // New event Data
-                                var newEventDateStart = eventData.start._d.toJSON().split('T')[0];
-                                var newEventDateEnd = eventData.end._d.toJSON().split('T')[0];
-                                var newEventTimeStart = eventData.start._d.toJSON().split('T')[1].split(':')[0];
-                                var newEventTimeEnd = eventData.end._d.toJSON().split('T')[1].split(':')[0];
+                                var newEventDateStart = eventData.start.date();
+                                var newEventDateEnd = eventData.end.date();
+                                var newEventTimeStart = eventData.start.hour();
+                                var newEventTimeEnd = eventData.end.hour();
                                 var newEventDuration = parseInt(newEventTimeEnd) - parseInt(newEventTimeStart);
 
                                 if(existingEventDateStart == newEventDateStart){
@@ -65,12 +67,19 @@
                             });
                             
                             // if create false dont create the event a throws a message to ask for new time.
-                            if(create){
+                            if(create && validForm && now.date() == eventData.start.date() && now.hour() < eventData.start.hour()){
+                                $('#fecha').val(eventData.start.date() + "/" + eventData.start.month() + "/" + eventData.start.year());
+                                $('#hora').val(eventData.start.hour() + ':00 - ' + eventData.end.hour() + ':00');
                                 $calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
                             }
 
                             else{
-                                alert('Por favor seleccione un nuevo horario');
+                                if (now.date() > eventData.start.date()) {
+                                    alert('Por favor seleccione un dia mayor o igual al actual');
+                                }
+                                else if(now.hour() >= eventData.start.hour() && now.date() > eventData.start.date()){
+                                    alert('Por favor seleccione un nuevo horario mayor al actual');
+                                }
                             }
                             
                         }

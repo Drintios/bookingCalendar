@@ -32,50 +32,67 @@
         <div class="row">
             <div id="calendar" class="col-md-6"></div>
             <div class="col-md-6" id="dateDetails">
-                <div class="col-md-6">
-                    <div id="bookingData" class="well">
-                        <h4>Booking Data</h4>
-                        <form>
-                            <div class="forn-group">
-                                <label for="fecha">Fecha</label>
-                                <input type="text" class="form-control" id="fecha" placeholder="Fecha">
-                            </div>
-                            <div id="datetimepicker" class="form-group input-append">
-                                <label for="hora">Hora</label>
-                                <input type="text" class="form-control" id="hora" placeholder="Hora" data-format="hh:mm">
-                                <span class="add-on btn btn-default "><i data-time-icon="glyphicon glyphicon-time" data-date-icon="glyphicon glyphicon-calendar"></i></span>
-                            </div>
-                        </form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="bookingData" class="well">
+                            <h4>Datos de la reservación</h4>
+                            <form id="bookData">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input id="nombre" class="form-control" placeholder="Nombre" type="text" data-validation='required' data-validation-error-msg="Debe indicar un nombre para esta reservación"></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellido">Apellido</label>
+                                    <input id="apellido" class="form-control" placeholder="Apellido" type="text" data-validation='required' data-validation-error-msg="Debe indicar un apellido para esta reservación"></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="correo">Correo</label>
+                                    <input id="correo" class="form-control" placeholder="Correo" type="text" data-validation="email"></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha">Fecha</label>
+                                    <input type="text" class="form-control" id="fecha" placeholder="Fecha">
+                                </div>
+                                <div id="datetimepicker" class="form-group input-append">
+                                    <label for="hora">Hora</label>
+                                    <input type="text" class="form-control" id="hora" placeholder="Hora">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="well">
+                            <h4>Datos para factura</h4>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="well">
-                        <h4>User Data</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="" class="btn btn-default">Confirmar</a>
                     </div>
                 </div>
             </div>
         </div>
-
     </div><!--Container-->
 
     <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script src='fullcalendar/lib/moment.min.js'></script>
-    <script src='fullcalendar/lib/jquery.min.js'></script>
+    
     <script src='fullcalendar/fullcalendar.min.js'></script>
     <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="form-validator/jquery.form-validator.js"></script>
 
     <script src='js/calendar.js'></script>
 
     <script> 
-        $(function(){
-            $('#datetimepicker').datetimepicker({
-                pickDate: false
-            });
+        $(document).ready(function(){
+            $.validate({ lang: 'es' });
         });
     </script>
 
-    <script>document.write('<script src="http://192.168.1.115:35729/livereload.js?snipver=1"></' + 'script>')</script>
+    <script>document.write('<script src="http://192.168.1.38:35729/livereload.js?snipver=1"></' + 'script>')</script>
 
 </body>
 </html>
